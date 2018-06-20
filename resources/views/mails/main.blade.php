@@ -33,6 +33,8 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
+        $("#mail_navbar").css('color','#cc02e2');
+        $("#mail_navbar").css('font-weight','bold');
         var editor1 = CKEDITOR.appendTo('email_area');
         txt = "{{ preg_replace( "/\r|\n/", "", $template_text ) }}";
 

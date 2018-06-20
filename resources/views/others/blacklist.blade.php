@@ -87,4 +87,10 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#blacklist_navbar").css('color','#cc02e2');
+        $("#blacklist_navbar").css('font-weight','bold');
+    });
+</script>
 @endsection
