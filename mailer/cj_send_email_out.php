@@ -130,12 +130,12 @@ $response = curl_exec($session);
 curl_close($session);
 if ($response == '{"message":"success"}'){
 
-$result4 = mysqli_query($res, "INSERT INTO infos_used (`business_name`,`domain_name`,`rank`,`admins_name`,`email`,`phone`,`mailing_address`,`flag`,`black`,`warning_total`,`error_total`,`created_at`,`updated_at`) VALUES ('$business_name','$domain_name','$rank','$fname','$email','$phone','$address','$flag','$black','$warning_total','$error_total','$created_at','$updated_at')");
+$result4 = mysqli_query($res, "INSERT INTO infos_used (`business_name`,`domain_name`,`rank`,`admins_name`,`email`,`phone`,`mailing_address`,`flag`,`black`,`warning_total`,`error_total`,`created_at`,`updated_at`) VALUES ('".$business_name."','".$domain_name."',".$rank.",'".$fname."','".$email."','".$phone."','".$address."',".$flag.",".$black.",".$warning_total.",".$error_total.",'".$created_at."','".$updated_at."')");
 
-$result5 = mysqli_query($res, "INSERT INTO blacklists (domain,domainORemail) VALUES ('$domain_name','1')");
-$result6 = mysqli_query($res, "INSERT INTO blacklists (domain,domainORemail) VALUES ('$email','2')");
+$result5 = mysqli_query($res, "INSERT INTO blacklists (domain,domainORemail) VALUES ('".$domain_name."','1')");
+$result6 = mysqli_query($res, "INSERT INTO blacklists (domain,domainORemail) VALUES ('".$email."','2')");
 
-$result7 = mysqli_query($res, "DELETE FROM infos WHERE id='$id' AND email='$email'");
+$result7 = mysqli_query($res, "DELETE FROM infos WHERE id=".$id." AND email='".$email."'");
 
 }
 ###############################################################
@@ -144,8 +144,8 @@ echo $response;
 }
 } // end if on suppression list
 else {
-$result4 = mysqli_query($res, "INSERT INTO infos_used (`business_name`,`domain_name`,`rank`,`admins_name`,`email`,`phone`,`mailing_address`,`flag`,`black`,`warning_total`,`error_total`,`created_at`,`updated_at`) VALUES ('$business_name','$domain_name','$rank','$fname','$email','$phone','$address','$flag','1','$warning_total','$error_total','$created_at','$updated_at')");
-$result7 = mysqli_query($res, "DELETE FROM infos WHERE id='$id' AND email='$email'");
+$result4 = mysqli_query($res, "INSERT INTO infos_used (`business_name`,`domain_name`,`rank`,`admins_name`,`email`,`phone`,`mailing_address`,`flag`,`black`,`warning_total`,`error_total`,`created_at`,`updated_at`) VALUES ('".$business_name."','".$domain_name."',".$rank.",'".$fname."','".$email."','".$phone."','".$address."',".$flag.",'1',".$warning_total.",".$error_total.",'".$created_at."','".$updated_at."')");
+$result7 = mysqli_query($res, "DELETE FROM infos WHERE id=".$id." AND email='".$email."'");
 }
 
 $res->close();
