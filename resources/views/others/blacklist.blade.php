@@ -47,7 +47,7 @@
                             </div>
                         </div>
 
-                        
+
                         <div class="col-md-4">
                             <form action="{{url("blacklist/insertE")}}"  method="post">
                                 <div class="row" id="blacklist_insert_div2">
@@ -105,7 +105,7 @@
                                             <tr>
                                                 <td>{{++$name_count}}</td>
                                                 <td>{{$row->domain}}</td>
-                                                <td style="width: 10%;"><a href="{{ url('blacklist/delete/'.$row->id) }}"><i class="fa fa-trash del" style="font-size: 20px;"></i></a></td>
+                                                <td><a href="{{ url('blacklist/delete/'.$row->id) }}"><i class="fa fa-trash del" style="font-size: 20px;"></i></a></td>
                                             </tr>
                                             @endif
                                         @endforeach
@@ -124,6 +124,81 @@
     $(document).ready(function() {
         $("#blacklist_navbar").css('color','#cc02e2');
         $("#blacklist_navbar").css('font-weight','bold');
+
+        $('#blacklist_domain').keyup(function() {
+            var str = $('#blacklist_domain').val();
+            $('#blacklist_table1 tbody').html("");
+            $.ajax({
+                url: "{{url('blacklist/getDomains')}}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    str: str
+                },
+                type: 'post',
+                success: function(result) {
+                    for(i = 0; i < result.length ; i++) {
+                        $('#blacklist_table1 tbody').append("<tr><td>"+(i+1)+"</td><td>"+result[i]['domain']+"</td><td><a href="+"{{url('blacklist/delete')}}"+"/"+result[i]['id']+"><i class='fa fa-trash del' style='font-size: 20px'></i></a></td></tr>");
+                    }
+                    console.log(result);
+                },
+                error: function(error) {
+                    alert("Error");
+                }
+            });
+            
+        });
+
+        $('#blacklist_email').keyup(function() {
+            var str = $('#blacklist_email').val();
+            $('#blacklist_table2 tbody').html("");
+            $.ajax({
+                url: "{{url('blacklist/getEmails')}}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    str: str
+                },
+                type: 'post',
+                success: function(result) {
+                    for(i = 0; i < result.length ; i++) {
+                        $('#blacklist_table2 tbody').append("<tr><td>"+(i+1)+"</td><td>"+result[i]['domain']+"</td><td><a href="+"{{url('blacklist/delete')}}"+"/"+result[i]['id']+"><i class='fa fa-trash del' style='font-size: 20px'></i></a></td></tr>");
+                    }
+                    console.log(result);
+                },
+                error: function(error) {
+                    alert("Error");
+                }
+            });
+            
+        });
+
+        $('#blacklist_name').keyup(function() {
+            var str = $('#blacklist_name').val();
+            $('#blacklist_table3 tbody').html("");
+            $.ajax({
+                url: "{{url('blacklist/getNames')}}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    str: str
+                },
+                type: 'post',
+                success: function(result) {
+                    for(i = 0; i < result.length ; i++) {
+                        $('#blacklist_table3 tbody').append("<tr><td>"+(i+1)+"</td><td>"+result[i]['domain']+"</td><td><a href="+"{{url('blacklist/delete')}}"+"/"+result[i]['id']+"><i class='fa fa-trash del' style='font-size: 20px'></i></a></td></tr>");
+                    }
+                    console.log(result);
+                },
+                error: function(error) {
+                    alert("Error");
+                }
+            });
+            
+        });
     });
 </script>
 @endsection

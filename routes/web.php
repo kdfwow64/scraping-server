@@ -33,5 +33,8 @@ Route::post('/mail/save', 'MailController@save');
 Route::post('/blacklist/insertD', 'HomeController@insertD');
 Route::post('/blacklist/insertE', 'HomeController@insertE');
 Route::post('/blacklist/insertN', 'HomeController@insertN');
+Route::post('/blacklist/getDomains', 'HomeController@getBlacklistDomains');
+Route::post('/blacklist/getEmails', 'HomeController@getBlacklistEmails');
+Route::post('/blacklist/getNames', 'HomeController@getBlacklistNames');
 Route::post('/permission/setPermission', 'HomeController@setPermission');
 

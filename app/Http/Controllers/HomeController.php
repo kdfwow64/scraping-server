@@ -91,6 +91,39 @@ class HomeController extends Controller
         return redirect()->action('HomeController@blacklist');
     }
 
+    public function getBlacklistDomains(Request $request) {
+        $str = $request->input('str');
+        if($str == "") {
+            $items = BlackList::where('domainORemail','=',1)->orderBy('id','DESC')->get(['*']);
+        } else {
+            $str = '%'.$str.'%';
+            $items = BlackList::where('domain','like',$str)->where('domainORemail','=',1)->get(['*']);
+        }
+        return response()->json($items);
+    }
+
+    public function getBlacklistEmails(Request $request) {
+        $str = $request->input('str');
+        if($str == "") {
+            $items = BlackList::where('domainORemail','=',2)->orderBy('id','DESC')->get(['*']);
+        } else {
+            $str = '%'.$str.'%';
+            $items = BlackList::where('domain','like',$str)->where('domainORemail','=',2)->get(['*']);
+        }
+        return response()->json($items);
+    }
+
+    public function getBlacklistNames(Request $request) {
+        $str = $request->input('str');
+        if($str == "") {
+            $items = BlackList::where('domainORemail','=',3)->orderBy('id','DESC')->get(['*']);
+        } else {
+            $str = '%'.$str.'%';
+            $items = BlackList::where('domain','like',$str)->where('domainORemail','=',3)->get(['*']);
+        }
+        return response()->json($items);
+    }
+
     public function blacklistDelete($id) {
         $del = BlackList::where('id',$id)->first();
         $del->delete();
