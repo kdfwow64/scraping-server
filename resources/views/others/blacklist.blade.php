@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12 col-md-offset-0">
             <div class="panel panel-default">
                 <div class="panel-heading">Black List</div>
 
@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <form action="{{url("blacklist/insertD")}}"  method="post">
                                 <div class="row" id="blacklist_insert_div1">
                                     <input type="input" class="form-control input-box" id="blacklist_domain" style="border: solid 1px;" placeholder="Please input domain..." name="blacklist_domain">
@@ -23,8 +23,8 @@
                                 {{csrf_field()}}
                             </form>
 
-                            <div class="row" id="blacklist_show_div">
-                                <table id="blacklist_table" class="table table-striped">
+                            <div class="row" id="blacklist_show_div1">
+                                <table id="blacklist_table1" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <td style="width: 10%;">No</td>
@@ -46,9 +46,9 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-5">
+
+                        
+                        <div class="col-md-4">
                             <form action="{{url("blacklist/insertE")}}"  method="post">
                                 <div class="row" id="blacklist_insert_div2">
                                     <input type="input" class="form-control input-box" id="blacklist_email" style="border: solid 1px;" placeholder="Please input email..." name="blacklist_email">
@@ -57,8 +57,8 @@
                                 {{csrf_field()}}
                             </form>
 
-                            <div class="row" id="blacklist_show_div">
-                                <table id="blacklist_table" class="table table-striped">
+                            <div class="row" id="blacklist_show_div2">
+                                <table id="blacklist_table2" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <td style="width: 10%;">No</td>
@@ -71,6 +71,39 @@
                                             @if($row->domainORemail == 2)
                                             <tr>
                                                 <td>{{++$email_count}}</td>
+                                                <td>{{$row->domain}}</td>
+                                                <td style="width: 10%;"><a href="{{ url('blacklist/delete/'.$row->id) }}"><i class="fa fa-trash del" style="font-size: 20px;"></i></a></td>
+                                            </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <form action="{{url("blacklist/insertN")}}"  method="post">
+                                <div class="row" id="blacklist_insert_div3">
+                                    <input type="input" class="form-control input-box" id="blacklist_name" style="border: solid 1px;" placeholder="Please input name..." name="blacklist_name">
+                                    <button type="submit" id="blacklist_insert_btn3" class="btn btn-warning" style="margin-left: 10px;">Insert</button>
+                                </div>
+                                {{csrf_field()}}
+                            </form>
+
+                            <div class="row" id="blacklist_show_div3">
+                                <table id="blacklist_table3" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <td style="width: 10%;">No</td>
+                                            <td>Name</td>
+                                            <td style="width: 10%;"><i class="fa fa-trash" style="font-size: 20px;"></i></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($blacklist as $key => $row)
+                                            @if($row->domainORemail == 3)
+                                            <tr>
+                                                <td>{{++$name_count}}</td>
                                                 <td>{{$row->domain}}</td>
                                                 <td style="width: 10%;"><a href="{{ url('blacklist/delete/'.$row->id) }}"><i class="fa fa-trash del" style="font-size: 20px;"></i></a></td>
                                             </tr>

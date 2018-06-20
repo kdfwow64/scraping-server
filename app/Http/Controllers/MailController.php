@@ -52,6 +52,8 @@ class MailController extends Controller
                 DB::update('update infos set black = "1" where LOWER(domain_name) like LOWER(?)' , [$sub]);
             } else if( $blacklist[$i]['domainORemail'] == '2' ) {
                 DB::update('update infos set black = "1" where email like ?' , [$blacklist[$i]['domain']]);
+            } else if( $blacklist[$i]['domainORemail'] == '3' ) {
+                DB::update('update infos set black = "1" where admins_name like ?' , [$blacklist[$i]['domain']]);
             }
         }
         $info = Info::get(['*']);
