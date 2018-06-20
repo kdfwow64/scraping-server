@@ -85,6 +85,8 @@
 <script type="text/javascript">
     
     $(document).ready(function(){
+        $("#home_navbar").css('color','#cc02e2');
+        $("#home_navbar").css('font-weight','bold');
 
         var noteOption = {
             clickToHide : true,

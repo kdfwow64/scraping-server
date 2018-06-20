@@ -108,6 +108,8 @@ input:checked + .slider:before {
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
+        $("#permission_navbar").css('color','#cc02e2');
+        $("#permission_navbar").css('font-weight','bold');
         $('input[type=checkbox]').click(function() {
             var id = $(this).prev().val();
             var value = $(this).prop('checked');

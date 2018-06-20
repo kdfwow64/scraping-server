@@ -28,11 +28,18 @@ $id = $myrow1['id'];
 
 
 $total_error = $warning_total + $error_total;
+if ($total_error <= '5'){$total_error = '8';}
+if ($rank <= '10'){
+$rank = $rank.'. The fact that you are on the first page is very good. But you will want to keep it there. There are many small tweaks we can show you to help keep you on the first page and even rank better.';
+}
+else {
+$rank = $rank.'. The fact that you are not on the first page is bad. You are losing business by not being found first. There are many small tweaks we can show you that could help you rank better.';
+}
 
 // check to see if email is on suppression list if so do not send
 $result2 = mysqli_query($res, "SELECT id FROM blacklists WHERE domain='$email' || domain='$domain_name' LIMIT 1");
 if (!$result2) {
-die('Send Email For Guilford Marketing failed to execute for some reason. Line 25 Error id');
+die('Send Email For Guilford Marketing failed to execute for some reason. Line 38 Error id');
 }
 $on_sup = mysqli_num_rows($result2);
 if($on_sup == '0'){
