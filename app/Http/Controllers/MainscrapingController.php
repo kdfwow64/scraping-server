@@ -181,7 +181,7 @@ class MainscrapingController extends Controller
 
 	$keywords = explode(",", $test_keywords);
 	if (!count($keywords)) die ("Error: no keywords defined.$NL");
-	if (!rmkdir($working_dir)) die("Failed to create/open $working_dir$NL");
+//	if (!rmkdir($working_dir)) die("Failed to create/open $working_dir$NL");
 
 	$country_data = get_google_cc($test_country, $test_language);
 	if (!$country_data) die("Invalid country/language code specified.$NL");
@@ -218,7 +218,7 @@ class MainscrapingController extends Controller
 	    */
 	    for ($page = $start_page; $page <= $end_page; $page++)
 	    {
-	    //    $serp_data = load_cache($search_string, $page, $country_data, $force_cache); // load results from local cache if available for today
+	        $serp_data = load_cache($search_string, $page, $country_data, $force_cache); // load results from local cache if available for today
 	    	$serp_data = NULL;
 	        $maxpages = 0;
 
@@ -288,7 +288,7 @@ class MainscrapingController extends Controller
 	                $serp_data['cc'] = $country_data['cc'];
 	                $serp_data['lc'] = $country_data['lc'];
 	                $serp_data['result_count'] = $result_count;
-	            //    store_cache($serp_data, $search_string, $page, $country_data); // store results into local cache
+	                store_cache($serp_data, $search_string, $page, $country_data); // store results into local cache
 	            }
 
 	            if ($process_result != "PROCESS_SUCCESS_MORE")
@@ -354,6 +354,7 @@ class MainscrapingController extends Controller
 	            }
 	            $pos_temp = $pos % 10;
 	            $pos_1 = ($pos - $pos_temp) / 10;
+	            $pos_temp --;
 	            $pos_str = ($start_page + $pos_1 + 1) * 10 + $pos_temp;
 
 	            $domain = $this->getDomainfromUrl($rank['url']);

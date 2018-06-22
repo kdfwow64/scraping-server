@@ -59,7 +59,7 @@
                             <input type="input" class="form-control input-box" name="email_keyword" id="email_keyword" name="email_keyword" placeholder="Search Email ..." style="border: solid 1px;">
                             <button id="email_search" class="btn btn-warning">Search</button>
                             <br>
-                            <table id="email_search_table" class="table table-striped" style="display: none;">
+                            <table id="email_search_table" class="table table-striped" style="display: none;font-size: 13px;">
                                 <thead>
                                     <tr>
                                         <td>No</td>
