@@ -37,7 +37,7 @@ $rank = $rank.'. The fact that you are not on the first page is bad. You are los
 }
 
 // check to see if email is on suppression list if so do not send
-$result2 = mysqli_query($res, "SELECT id FROM blacklists WHERE domain='$email' || domain='$domain_name' LIMIT 1");
+$result2 = mysqli_query($res, "SELECT id FROM blacklists WHERE domain='$email' || domain='$domain_name' || domain='$fname' LIMIT 1");
 if (!$result2) {
 die('Send Email For Guilford Marketing failed to execute for some reason. Line 38 Error id');
 }
@@ -130,7 +130,9 @@ $response = curl_exec($session);
 curl_close($session);
 if ($response == '{"message":"success"}'){
 
-$result4 = mysqli_query($res, "INSERT INTO infos_used (`business_name`,`domain_name`,`rank`,`admins_name`,`email`,`phone`,`mailing_address`,`flag`,`black`,`warning_total`,`error_total`,`created_at`,`updated_at`) VALUES ('".$business_name."','".$domain_name."',".$rank.",'".$fname."','".$email."','".$phone."','".$address."',".$flag.",".$black.",".$warning_total.",".$error_total.",'".$created_at."','".$updated_at."')");
+$result4 = mysqli_query($res, "INSERT INTO infos_used SELECT * FROM infos WHERE id='$id'");
+
+//$result4 = mysqli_query($res, "INSERT INTO infos_used (`business_name`,`domain_name`,`rank`,`admins_name`,`email`,`phone`,`mailing_address`,`flag`,`black`,`warning_total`,`error_total`,`created_at`,`updated_at`) VALUES ('".$business_name."','".$domain_name."','".$rank."','".$fname."','".$email."','".$phone."','".$address."','".$flag."','".$black."','".$warning_total."','".$error_total."','".$created_at."','".$updated_at."')");
 
 $result5 = mysqli_query($res, "INSERT INTO blacklists (domain,domainORemail) VALUES ('".$domain_name."','1')");
 $result6 = mysqli_query($res, "INSERT INTO blacklists (domain,domainORemail) VALUES ('".$email."','2')");
@@ -144,7 +146,8 @@ echo $response;
 }
 } // end if on suppression list
 else {
-$result4 = mysqli_query($res, "INSERT INTO infos_used (`business_name`,`domain_name`,`rank`,`admins_name`,`email`,`phone`,`mailing_address`,`flag`,`black`,`warning_total`,`error_total`,`created_at`,`updated_at`) VALUES ('".$business_name."','".$domain_name."',".$rank.",'".$fname."','".$email."','".$phone."','".$address."',".$flag.",'1',".$warning_total.",".$error_total.",'".$created_at."','".$updated_at."')");
+$result4 = mysqli_query($res, "INSERT INTO infos_used SELECT * FROM infos WHERE id='$id'");
+$result5 = mysqli_query($res, "UPDATE infos_used SET black = '1' WHERE id='$id'");
 $result7 = mysqli_query($res, "DELETE FROM infos WHERE id=".$id." AND email='".$email."'");
 }
 
